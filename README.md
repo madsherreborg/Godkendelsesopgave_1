@@ -18,6 +18,8 @@ Denne applikation har til formål at skabe en platform der gør det nemmere at f
 - Log ud
 - Find konsulenter
 - Find virksomheder
+- Scan kontrakt
+- Se kontrakter
 
 ## Installation
 
