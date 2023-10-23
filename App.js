@@ -1,18 +1,17 @@
-// Importér de nødvendige biblioteker og komponenter fra React Native og Firebase.
+// Importér nødvendige komponenter fra React og React Navigation.
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { Card } from 'react-native-paper';
-
-// Importér de forskellige komponenter, der skal bruges i navigationen.
+import { initializeApp } from 'firebase/app';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import ProfileScreen from './components/ProfileScreen';
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 import ConsultantsList from './components/ConsultantsList';
 import CompanyList from './components/CompanyList';
+import ScanContractScreen from './components/ScanContractScreen';
+import ContractsScreen from './components/Contracts'; // Tilføjet ContractsScreen
 
 // Konfigurer din Firebase-app ved hjælp af den angivne konfigurationsnøgle.
 const firebaseConfig = {
@@ -24,24 +23,20 @@ const firebaseConfig = {
   appId: "1:324239871746:web:d1af4c7877ca6f01dc7c1b"
 };
 
-// Initialiser Firebase-appen med konfigurationsnøglen.
-const app = initializeApp(firebaseConfig);
 
-// Hent auth-objektet fra Firebase-appen for at håndtere brugerautorisation.
+const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 export default function App() {
   const [user, setUser] = useState({ loggedIn: false });
+  const Stack = createStackNavigator();
 
-  // Her aktiverer vi en lytter ved hjælp af onAuthStateChanged til dynamisk at observere, om brugeren er logget ind eller ej.
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // Brugeren er logget ind
         setUser({ loggedIn: true, user: user });
-        console.log("Du er logget ind!");
+        console.log('Du er logget ind!');
       } else {
-        // Brugeren er logget ud
         setUser({ loggedIn: false });
       }
     });
@@ -50,17 +45,16 @@ export default function App() {
     };
   }, [auth]);
 
-  const Stack = createStackNavigator();
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        {/* Definér navigationsskærme for din app. */}
         <Stack.Screen name="Login" component={LoginForm} />
         <Stack.Screen name="SignUp" component={SignUpForm} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="ConsultantsList" component={ConsultantsList} />
         <Stack.Screen name="CompanyList" component={CompanyList} />
+        <Stack.Screen name="ScanContract" component={ScanContractScreen} />
+        <Stack.Screen name="Contracts" component={ContractsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

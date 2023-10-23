@@ -3,12 +3,12 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { initializeApp } from "firebase/app";
 import { getAuth, signOut } from "firebase/auth";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'; // Importer useNavigation
 
 function ProfileScreen() {
     const auth = getAuth();
     const user = auth.currentUser;
-    const navigation = useNavigation();
+    const navigation = useNavigation(); // Brug useNavigation-hooket
 
     // Funktion til at håndtere logud-funktionalitet.
     const handleLogOut = async () => {
@@ -19,6 +19,18 @@ function ProfileScreen() {
         } catch (error) {
             console.error("Logud mislykkedes: ", error);
         }
+    };
+
+    // Funktion til at håndtere "Scan Kontrakt" knappen.
+    const handleScanContract = () => {
+        // Naviger til ScanContractScreen, hvor brugeren kan scanne sin kontrakt.
+        navigation.navigate('ScanContract');
+    };
+
+    // Funktion til at håndtere "Se Kontrakter" knappen.
+    const handleViewContracts = () => {
+        // Naviger til ContractsScreen, hvor brugeren kan se kontrakter.
+        navigation.navigate('Contracts');
     };
 
     if (!user) {
@@ -45,6 +57,12 @@ function ProfileScreen() {
             </TouchableOpacity>
             <TouchableOpacity style={styles.customButton} onPress={() => navigation.navigate('CompanyList')}>
                 <Text style={styles.buttonText}>Find virksomheder</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.customButton} onPress={handleScanContract}>
+                <Text style={styles.buttonText}>Scan kontrakt</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.customButton} onPress={handleViewContracts}>
+                <Text style={styles.buttonText}>Se kontrakter</Text>
             </TouchableOpacity>
         </View>
     );
