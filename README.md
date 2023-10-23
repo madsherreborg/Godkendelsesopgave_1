@@ -1,11 +1,12 @@
-# Godkendelsesopgave_1
+# Godkendelsesopgave_2
 
 Dette projekt er en del af en obligatorisk individuel opgave i forbindelse med kurset Innovation og teknologi. 
 Formålet med opgaven er at udvikle og dokumentere en mobilapplikation i React Native med fokus på brugerinddragelse og innovation.
 
 # Demo af applikation
 
-https://youtu.be/9_Ntc6tUbWE?si=x40bdPaCmMIphob2
+www.youtube.com/watch?v=fIPsRufMyEw
+
 
 ## Beskrivelse
 
